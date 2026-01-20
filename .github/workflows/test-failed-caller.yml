@@ -1,0 +1,19 @@
+name: Test Failed Workflow Caller
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'ID of the workflow run to rerun'
+        required: true
+        type: string
+
+permissions: {}
+
+jobs:
+  call-reusable:
+    uses: luke-flour/wordpress-develop/.github/workflows/reusable-failed-workflow.yml@bugfix/failed-workflow
+    with:
+      run_id: ${{ inputs.run_id }}
+    permissions:
+      actions: write
